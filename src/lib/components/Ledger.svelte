@@ -40,6 +40,19 @@
                 { label: 'VERSIONING', value: 'FULL' },
                 { label: 'AUDIT TRAIL', value: '100%' }
             ]
+        },
+        {
+            id: 'roastly',
+            num: '02',
+            name: 'Roastly',
+            category: 'Retail / Point of Sale',
+            url: 'https://roastly-pos-project.vercel.app/',
+            brief: 'Point-of-sale system for coffee shops handling order entry, menu management, and sales reporting from a single fast checkout interface.',
+            metrics: [
+                { label: 'CHECKOUT', value: 'FAST' },
+                { label: 'MENU MGMT', value: 'LIVE' },
+                { label: 'REPORTING', value: 'DAILY' }
+            ]
         }
     ];
 
