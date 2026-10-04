@@ -29,51 +29,16 @@
 
     const entries = [
         {
-            id: 'nimbus',
+            id: 'edms',
             num: '01',
-            name: 'Nimbus Ledger',
-            category: 'Fintech / Internal Tooling',
-            brief: 'Rebuilt a legacy reconciliation spreadsheet into a real-time ledger with automated audit trails and multi-currency settlement.',
+            name: 'EDMS',
+            category: 'Enterprise / Document Management',
+            url: 'https://edmslandingpage.vercel.app/',
+            brief: 'Electronic document management system centralizing storage, versioning, and controlled access to organizational records with full audit trails.',
             metrics: [
-                { label: 'RECON TIME', value: '-92%' },
-                { label: 'LOAD', value: '0.4s' },
-                { label: 'UPTIME', value: '99.98%' }
-            ]
-        },
-        {
-            id: 'harborline',
-            num: '02',
-            name: 'Harborline',
-            category: 'Logistics / Local-First',
-            brief: 'Offline-capable dispatch app for field crews with zero-latency local sync and automatic conflict resolution across nodes.',
-            metrics: [
-                { label: 'OFFLINE SESSIONS', value: '100%' },
-                { label: 'SYNC LAG', value: '<80ms' },
-                { label: 'CREWS ONBOARDED', value: '46' }
-            ]
-        },
-        {
-            id: 'meridian',
-            num: '03',
-            name: 'Meridian Storefront',
-            category: 'E-Commerce / Frontend',
-            brief: 'Headless storefront rewrite focused on stripped-down runtime footprint and checkout conversion.',
-            metrics: [
-                { label: 'CONVERSION', value: '+32%' },
-                { label: 'LCP', value: '1.1s' },
-                { label: 'BUNDLE SIZE', value: '-61%' }
-            ]
-        },
-        {
-            id: 'auxframe',
-            num: '04',
-            name: 'Auxframe Pipelines',
-            category: 'Automation / AI Orchestration',
-            brief: 'Workflow engine unifying CRM, invoicing, and support tooling behind a single automation layer with AI-assisted triage.',
-            metrics: [
-                { label: 'MANUAL HOURS CUT', value: '120/mo' },
-                { label: 'TICKET TRIAGE', value: '-74%' },
-                { label: 'SYSTEMS UNIFIED', value: '7' }
+                { label: 'ACCESS CONTROL', value: 'RBAC' },
+                { label: 'VERSIONING', value: 'FULL' },
+                { label: 'AUDIT TRAIL', value: '100%' }
             ]
         }
     ];
@@ -120,9 +85,14 @@
         <!-- Ledger Rows -->
         <div class="flex flex-col">
             {#each entries as entry, i (entry.id)}
-                <div
-                    role="contentinfo"
-                    class="animate-ledger-row group relative border-b border-zinc-900/60 first:border-t transition-all duration-500 ease-out cursor-none"
+                <svelte:element
+                    this={entry.url ? 'a' : 'div'}
+                    href={entry.url}
+                    target={entry.url ? '_blank' : undefined}
+                    rel={entry.url ? 'noopener noreferrer' : undefined}
+                    aria-label={entry.url ? `${entry.name} — visit project site` : undefined}
+                    role={entry.url ? undefined : 'contentinfo'}
+                    class="animate-ledger-row group relative block border-b border-zinc-900/60 first:border-t transition-all duration-500 ease-out cursor-none"
                     class:bg-white={activeEntry === entry.id}
                     style="animation-delay: {i * 150}ms;"
                     onmouseenter={() => (activeEntry = entry.id)}
@@ -149,7 +119,7 @@
                                 class="font-sans text-lg md:text-xl font-medium tracking-tight transition-colors duration-500"
                                 class:text-black={activeEntry === entry.id}
                                 class:text-white={activeEntry !== entry.id}
-                            >{entry.name}</h3>
+                            >{entry.name}{#if entry.url}<span class="ml-2 text-sm font-mono" aria-hidden="true">↗</span>{/if}</h3>
                             <p
                                 class="font-sans text-sm font-light mt-2 leading-relaxed transition-colors duration-500"
                                 class:text-zinc-600={activeEntry === entry.id}
@@ -178,7 +148,7 @@
                             {/each}
                         </div>
                     </div>
-                </div>
+                </svelte:element>
             {/each}
         </div>
 
